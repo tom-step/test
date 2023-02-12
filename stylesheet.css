@@ -1,0 +1,104 @@
+@font-face {font-family: JosefinSansLight; src: url('JosefinSansLight-ZVEll.otf');}
+@font-face {font-family: JosefinSansRegular; src: url('JosefinSansRegular-x3LYV.otf');}
+
+
+#header{
+	background: white;
+	width: 100%;
+	font-size: 40;
+	text-align: center;
+	position: relative;		
+	font-family: JosefinSansLight;
+}
+
+#container{
+	margin: 0 auto;
+	max-width: 1000px;
+	padding: 0;
+	font-size: 30;
+	text-align: center;
+	clear: left;	
+	position: relative;		
+	font-family: JosefinSansLight;
+}
+	
+#footer
+{
+	text-align: center;
+	padding: 20px;
+	height: 1%;
+	opacity:0.6;
+	font-weight: bold;
+	font-family: JosefinSansLight;
+}
+
+
+.flex-pics {
+	display: flex;
+	flex-flow: row;
+	justify-content: space_around;
+	align-items: stretch;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	width: 100%;
+
+}
+
+.flex-pics-item {
+	padding: 10px;
+	width: 50%;
+	margin-top: 10px;
+	background: grey;
+}
+
+
+.normal { font-weight: normal; }
+	
+.grow { 
+transition: all .2s ease-in-out; 
+}
+
+.grow:hover { 
+transform: scale(1.1); 
+}
+
+a:link { text-decoration: none; }
+
+
+a:visited { text-decoration: none; }
+
+
+a:hover { text-decoration: none; }
+
+
+a:active { text-decoration: none; }
+
+
+
+* {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 800px;
+  position: relative;
+  margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
