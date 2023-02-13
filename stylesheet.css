@@ -2,14 +2,17 @@
 @font-face {font-family: JosefinSansRegular; src: url('JosefinSansRegular-x3LYV.otf');}
 
 
+
+
 #header{
-	background: white;
 	width: 100%;
 	font-size: 40;
 	text-align: center;
 	position: relative;		
 	font-family: JosefinSansLight;
 }
+
+
 
 #container{
 	margin: 0 auto;
@@ -21,7 +24,7 @@
 	position: relative;		
 	font-family: JosefinSansLight;
 }
-	
+
 #footer
 {
 	text-align: center;
@@ -31,6 +34,7 @@
 	font-weight: bold;
 	font-family: JosefinSansLight;
 }
+
 
 
 .flex-pics {
@@ -51,6 +55,29 @@
 	margin-top: 10px;
 	background: grey;
 }
+
+.flex-navigation {
+	  display: flex;
+	  flex-flow: column;
+	  justify-content: space-between;
+	  align-items: center;
+	  padding: 40;
+	  margin: 0;
+	list-style: none;
+	
+}
+
+
+.flex-navigation a
+{
+	display: block;
+	padding: 5px 10px;
+	color:black;
+	text-decoration: none;
+	font-size: 40;
+	
+}
+
 
 
 .normal { font-weight: normal; }
@@ -102,3 +129,13 @@ a:active { text-decoration: none; }
   from {opacity: .4}
   to {opacity: 1}
 }
+
+@media only screen and (min-width: 600px) {
+   .flex-navigation {
+	  flex-flow: row;
+	  
+	}
+	
+	.flex-navigation a {
+	  flex-flow: row;
+	}
