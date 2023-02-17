@@ -5,17 +5,27 @@
 	
 		<title>Funktion Town Form</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
 		<link rel="stylesheet" type="text/css" href="stylesheet.css"></link>
+
 
 		<style>
 		</style>
 
 	</head>
 	<body>
-		<div class="container">
+		<div id="container">
+		<ul class="flex-navigation">		
+						<a class="grow" href="index.html">
+							<img src="logo.png" alt="" align="center" width="25%">	
+						</a>
+		</ul>
+
 
 		<br>
-		  <h1>Enquire for your Funktion</h1>
+		  <br>
+		  
+		<p>If you're interested in booking an event with us and want to know more details, fill in this form to start a conversation.</p>
 		  <br>
 		  <form target="_blank" action="https://formsubmit.co/hello@tomstep.net" method="POST">
 			<div class="form-group">
@@ -31,14 +41,7 @@
 			  </div>
 			</div>
 			
-			<label for="type">Event Type</label>
-			  <select name="event" id="type">
-				<option value="wedding">Wedding</option>
-				<option value="party">Party</option>
-				<option value="corporate">Corporate</option>
-				<option value="other">Other</option>
-			  </select>			
-			<br><br>
+				
 			<div class="form-group">
 				<input type="date" name="date" class="form-control" placeholder="Date of Event" required>
 				<br>
@@ -48,12 +51,27 @@
 				<br>
 			</div>	
 			
-			<br>
+			
+			<label for="type">Event Type</label>
+			  <select name="event" id="type">
+				<option value="wedding">Wedding</option>
+				<option value="party">Party</option>
+				<option value="corporate">Corporate</option>
+				<option value="other">Other</option>
+			  </select>		
+			<br><br>
+
 			
 			<button type="submit" class="btn btn-lg btn-dark btn-block">Send</button>
 		  </form>
 		</div>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
+		<div id="footer">
+			<p>
+				Copyright: Funktion Town 2023
+			</p>
+				
+		</div>
 	</body>
 </html>

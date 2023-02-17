@@ -1,16 +1,7 @@
 @font-face {font-family: JosefinSansLight; src: url('JosefinSansLight-ZVEll.otf');}
 @font-face {font-family: JosefinSansRegular; src: url('JosefinSansRegular-x3LYV.otf');}
+@font-face {font-family: GoodMorning; src: url('Good Morning.otf');}
 
-
-
-
-#header{
-	width: 100%;
-	font-size: 40;
-	text-align: center;
-	position: relative;		
-	font-family: JosefinSansLight;
-}
 
 
 
@@ -35,13 +26,23 @@
 	font-family: JosefinSansLight;
 }
 
+.goodmorning { font-family: GoodMorning; }
+
+#leftornament  {
+float: left;    
+ margin: 20 0 0 15px;
+}
+
+#rightornament  {
+float: right;    
+ margin: 20 0 0 15px;
+}
 
 
-.flex-pics {
+.flex {
 	display: flex;
-	flex-flow: row;
-	justify-content: space_around;
-	align-items: stretch;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
 	padding: 0;
 	margin: 0;
 	list-style: none;
@@ -49,11 +50,13 @@
 
 }
 
-.flex-pics-item {
+.flex-item {
 	padding: 10px;
-	width: 50%;
+	width: 100%;
 	margin-top: 10px;
-	background: grey;
+	margin-left: 5px;
+	margin-right: 5px;
+	border-style: solid;
 }
 
 .flex-navigation {
@@ -131,6 +134,12 @@ a:active { text-decoration: none; }
 }
 
 @media only screen and (min-width: 600px) {
+	
+.flex-item {
+	width: 25%;
+
+}
+
    .flex-navigation {
 	  flex-flow: row;
 	  
