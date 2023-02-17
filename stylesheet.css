@@ -38,6 +38,11 @@ float: right;
  margin: 20 0 0 15px;
 }
 
+#header-image{
+	width: 100%;
+	
+}
+
 
 .flex {
 	display: flex;
@@ -134,7 +139,10 @@ a:active { text-decoration: none; }
 }
 
 @media only screen and (min-width: 600px) {
+#header-image{
+	width: 25%;
 	
+}
 .flex-item {
 	width: 25%;
 
