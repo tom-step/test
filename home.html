@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Scroll Interaction</title>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        
+        }
+
+        .container {
+            width: 130vw;
+            height: 120vh;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+		<img alt="Rebecka's Home"  src="images/koket.png"  style="width: 100%; height: 100%;"/>
+
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <script>
+        class El {
+            constructor(element) {
+                this.element = document.querySelector(element);
+            }
+
+            scrollElement() {
+                let self = this;
+
+                window.addEventListener('mousemove', (e) => {
+                    let eX = self.element.offsetWidth;
+                    let eY = self.element.offsetHeight;
+                    let cX = e.clientX;
+                    let cY = e.clientY;
+                    let wX = window.innerWidth;
+                    let wY = window.innerHeight;
+                    let difX = eX - wX;
+                    let difY = eY - wY;
+
+                    let tX = gsap.utils.mapRange(0, window.innerWidth, 0, -difX)(cX);
+                    let tY = gsap.utils.mapRange(0, window.innerHeight, 0, -difY)(cY);
+
+                    gsap.to(self.element, {
+                        x: tX,
+                        y: tY,
+                        duration: 0.5
+                    });
+                });
+            }
+        }
+
+        const el = new El('.container');
+        el.scrollElement();
+    </script>
+
+</body>
+</html>
+
+
+
+
+

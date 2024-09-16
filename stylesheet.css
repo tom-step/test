@@ -1,158 +1,41 @@
-@font-face {font-family: JosefinSansLight; src: url('JosefinSansLight-ZVEll.otf');}
-@font-face {font-family: JosefinSansRegular; src: url('JosefinSansRegular-x3LYV.otf');}
-@font-face {font-family: GoodMorning; src: url('Good Morning.otf');}
-
-
+@font-face {
+	font-family: "bjorken";
+	src: url("fonts/bjorken.otf");
+	}
+	
 
 
 #container{
-	margin: 0 auto;
-	max-width: 1000px;
-	padding: 0;
-	font-size: 30;
+	font-family: bjorken;
+	font-size: 50;
 	text-align: center;
-	clear: left;	
-	position: relative;		
-	font-family: JosefinSansLight;
+	}
+
+
+
+.hide {
+  display: none;
 }
 
-#footer
-{
-	text-align: center;
-	padding: 20px;
-	height: 1%;
-	opacity:0.6;
-	font-weight: bold;
-	font-family: JosefinSansLight;
+.myDIV:hover + .hide {
+  display: block;
+  color: red;
 }
-
-.goodmorning { font-family: GoodMorning; }
-
-#leftornament  {
-float: left;    
- margin: 20 0 0 15px;
-}
-
-#rightornament  {
-float: right;    
- margin: 20 0 0 15px;
-}
-
-#header-image{
-	width: 100%;
 	
-}
-
-
-.flex {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
-	padding: 0;
-	margin: 0;
-	list-style: none;
-	width: 100%;
-
-}
-
-.flex-item {
-	padding: 10px;
-	width: 100%;
-	margin-top: 10px;
-	margin-left: 5px;
-	margin-right: 5px;
-	border-style: solid;
-}
-
-.flex-navigation {
-	  display: flex;
-	  flex-flow: column;
-	  justify-content: space-between;
-	  align-items: center;
-	  padding: 40;
-	  margin: 0;
-	list-style: none;
 	
-}
+
+.index-link  {
+text-decoration:none;}
 
 
-.flex-navigation a
-{
-	display: block;
-	padding: 5px 10px;
-	color:black;
-	text-decoration: none;
-	font-size: 40;
-	
-}
-
-
-
-.normal { font-weight: normal; }
-	
 .grow { 
 transition: all .2s ease-in-out; 
 }
 
 .grow:hover { 
-transform: scale(1.1); 
-}
-
-a:link { text-decoration: none; }
-
-
-a:visited { text-decoration: none; }
-
-
-a:hover { text-decoration: none; }
-
-
-a:active { text-decoration: none; }
-
-
-
-* {box-sizing:border-box}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 800px;
-  position: relative;
-  margin: auto;
-}
-
-/* Hide the images by default */
-.mySlides {
-  display: none;
+transform: scale(1.05); 
 }
 
 
 
-/* Fading animation */
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
 
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-@media only screen and (min-width: 600px) {
-#header-image{
-	width: 25%;
-	
-}
-.flex-item {
-	width: 25%;
-
-}
-
-   .flex-navigation {
-	  flex-flow: row;
-	  
-	}
-	
-	.flex-navigation a {
-	  flex-flow: row;
-	}
