@@ -119,7 +119,7 @@ const location = [
   <td>${formatDate(gigDate)}</td>
   <td>${gig.Group}</td>
   <td>${location}</td>
-  <td><a href="${gig["Ticket Link"]}" target="_blank">Tickets</a></td>
+  <td>${gig["Ticket Link"] ? `<a href="${gig["Ticket Link"]}" target="_blank">link to event</a>` : ""}</td>
 `;
 
   tbody.appendChild(tr);
