@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Upcoming Live Shows</title>
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  th {
+    background: #222;
+    color: white;
+  }
+  a {
+    color: #1a73e8;
+    text-decoration: none;
+  }
+  .checkbox-true {
+    color: green;
+    font-weight: bold;
+  }
+  .checkbox-false {
+    color: red;
+    font-weight: normal;
+  }
+</style>
+</head>
+<body>
+<h1>Upcoming Live Shows</h1>
+<table id="gigsTable">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Group</th>
+      <th>Venue</th>
+      <th>Town/City</th>
+      <th>Country</th>
+      <th>Ticket Link</th>
+      <th>Tickets OTD</th>
+      <th>Free Entry</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.6.0/tabletop.min.js"></script>
+<script>
+  const sheetID = '2PACX-1vR2D1SSWPROsEE7jm5B4lKA1xBWzFRK1LahzGMkG_icgPldtVCEw4plClJko01AudHZHdX270nz3T7d'; // <-- replace with your Google Sheet ID
+
+  function parseDateDDMMYYYY(str) {
+    const [day, month, year] = str.split('/');
+    return new Date(`${year}-${month}-${day}`);
+  }
+
+  function loadGigs(data) {
+  console.log(data); // <--- see what Tabletop is returning
+  
+    const tbody = document.querySelector('#gigsTable tbody');
+    const today = new Date();
+
+    data.forEach(gig => {
+      if (!gig.Date) return; // skip empty rows
+
+      const gigDate = parseDateDDMMYYYY(gig.Date);
+      if (gigDate >= today) {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td>${gig.Date}</td>
+          <td>${gig.Group}</td>
+          <td>${gig.Venue}</td>
+          <td>${gig['Town/City']}</td>
+          <td>${gig.Country}</td>
+          <td><a href="${gig['Ticket Link']}" target="_blank">Ticket Link</a></td>
+          <td class="${gig['Tickets OTD'] === "TRUE" ? "checkbox-true" : "checkbox-false"}">${gig['Tickets OTD']}</td>
+          <td class="${gig['Free Entry'] === "TRUE" ? "checkbox-true" : "checkbox-false"}">${gig['Free Entry']}</td>
+        `;
+
+        tbody.appendChild(tr);
+      }
+    });
+  }
+
+  Tabletop.init({
+    key: sheetID,
+    callback: loadGigs,
+    simpleSheet: true
+  });
+</script>
+</body>
+</html>
