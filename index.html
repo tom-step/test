@@ -1,25 +1,109 @@
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="text/css" href="stylesheet.css">
-	</head>
-	
-	<body style="background-color: white">
-	
-		<div id="container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Upcoming Live Shows</title>
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  th {
+    background: #222;
+    color: white;
+  }
+  a {
+    color: #1a73e8;
+    text-decoration: none;
+  }
+  .checkbox-true {
+    color: green;
+    font-weight: bold;
+  }
+  .checkbox-false {
+    color: red;
+    font-weight: normal;
+  }
+</style>
+</head>
+<body>
+<h1>Upcoming Live Shows</h1>
+<table id="gigsTable">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Group</th>
+      <th>Venue</th>
+      <th>Town/City</th>
+      <th>Country</th>
+      <th>Ticket Link</th>
+      <th>Tickets OTD</th>
+      <th>Free Entry</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
 
+<script>
+const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR2D1SSWPROsEE7jm5B4lKA1xBWzFRK1LahzGMkG_icgPldtVCEw4plClJko01AudHZHdX270nz3T7d/pub?output=csv";
 
-					<a href="oknytt.html" class="index-link">
-						<img src="images/tradkojan.png" style="position:absolute; top:4vw; left:5vw;"  width="40%" class="grow">
-					</a>
+function parseCSV(text) {
+  const lines = text.trim().split("\n");
+  const headers = lines.shift().split(",");
 
-					<img src="images/welcome.png" style="position:absolute; top:4vw; left:55vw;" width="40%">
-					
-					<a href="home.html" class="index-link">
-						<img src="images/stugan.png" style="position:absolute; top:22vw; left:35vw;" width="55%" class="grow">
-					</a>
-			
-				
-		</div>
-	</body>
+  return lines.map(line => {
+    const values = line.split(",");
+    let obj = {};
+    headers.forEach((h, i) => obj[h.trim()] = values[i]?.trim());
+    return obj;
+  });
+}
+
+function parseDateDDMMYYYY(str) {
+  const [day, month, year] = str.split("/");
+  return new Date(`${year}-${month}-${day}`);
+}
+
+fetch(sheetURL)
+  .then(res => res.text())
+  .then(csv => {
+    const data = parseCSV(csv);
+    const tbody = document.querySelector("#gigsTable tbody");
+    const today = new Date();
+
+    data.forEach(gig => {
+      if (!gig.Date) return;
+
+      const gigDate = parseDateDDMMYYYY(gig.Date);
+      if (gigDate >= today) {
+
+        const ticketsOTD = gig["Tickets OTD"]?.toUpperCase() === "TRUE";
+        const freeEntry = gig["Free Entry"]?.toUpperCase() === "TRUE";
+
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+          <td>${gig.Date}</td>
+          <td>${gig.Group}</td>
+          <td>${gig.Venue}</td>
+          <td>${gig["Town/City"]}</td>
+          <td>${gig.Country}</td>
+          <td><a href="${gig["Ticket Link"]}" target="_blank">Ticket Link</a></td>
+          <td class="${ticketsOTD ? "checkbox-true" : "checkbox-false"}">${ticketsOTD ? "Yes" : "No"}</td>
+          <td class="${freeEntry ? "checkbox-true" : "checkbox-false"}">${freeEntry ? "Yes" : "No"}</td>
+        `;
+
+        tbody.appendChild(tr);
+      }
+    });
+  });
+</script>
+
+</body>
 </html>
