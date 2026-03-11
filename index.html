@@ -1,9 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Upcoming Live Shows</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<title>Calendar</title>
 <style>
+	body {
+			background-image: url('images/live/live.png');
+			background-size: cover;
+			}
+			
   table {
     width: 100%;
     border-collapse: collapse;
@@ -33,7 +38,11 @@
 </style>
 </head>
 <body>
-<h1>Upcoming Live Shows</h1>
+	<div id="container">
+			<p style="margin-top: 45vw; color: black;">.
+			</p>
+			
+			
 <table id="gigsTable">
   <thead>
 
@@ -41,7 +50,27 @@
   <tbody></tbody>
 </table>
 
-<script>
+			
+			<div class="sign-container">
+				<img src="images/live/sign post (live).png" class="sign-post">
+				
+				<a href="javascript:history.back()" class="index-link">
+					<img src="images/tom.png" class="sign-link-1">
+				</a>
+				<a href="index.html" class="index-link">
+					<img src="images/tom.png" class="sign-link-2">
+				</a>
+				<a href="all music.html" class="index-link">
+					<img src="images/tom.png" class="sign-link-3">
+				</a>
+			</div>
+			
+			</div>
+			<img id="bird-cursor" src="cursor/bird up 1.png">
+
+	</body>
+	<script src="main.js"></script>
+	<script>
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR2D1SSWPROsEE7jm5B4lKA1xBWzFRK1LahzGMkG_icgPldtVCEw4plClJko01AudHZHdX270nz3T7d/pub?output=csv";
 
 function parseCSV(text) {
@@ -143,5 +172,4 @@ if (gig["Ticket Link"] && gig["Ticket Link"].trim() !== "") {
   });
 </script>
 
-</body>
 </html>
