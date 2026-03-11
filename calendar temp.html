@@ -50,49 +50,60 @@
   <tbody></tbody>
 </table>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.6.0/tabletop.min.js"></script>
 <script>
-  const sheetID = '2PACX-1vR2D1SSWPROsEE7jm5B4lKA1xBWzFRK1LahzGMkG_icgPldtVCEw4plClJko01AudHZHdX270nz3T7d'; // <-- replace with your Google Sheet ID
+const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR2D1SSWPROsEE7jm5B4lKA1xBWzFRK1LahzGMkG_icgPldtVCEw4plClJko01AudHZHdX270nz3T7d/pub?output=csv";
 
-  function parseDateDDMMYYYY(str) {
-    const [day, month, year] = str.split('/');
-    return new Date(`${year}-${month}-${day}`);
-  }
+function parseCSV(text) {
+  const lines = text.trim().split("\n");
+  const headers = lines.shift().split(",");
 
-  function loadGigs(data) {
-  console.log(data); // <--- see what Tabletop is returning
-  
-    const tbody = document.querySelector('#gigsTable tbody');
+  return lines.map(line => {
+    const values = line.split(",");
+    let obj = {};
+    headers.forEach((h, i) => obj[h.trim()] = values[i]?.trim());
+    return obj;
+  });
+}
+
+function parseDateDDMMYYYY(str) {
+  const [day, month, year] = str.split("/");
+  return new Date(`${year}-${month}-${day}`);
+}
+
+fetch(sheetURL)
+  .then(res => res.text())
+  .then(csv => {
+    const data = parseCSV(csv);
+    const tbody = document.querySelector("#gigsTable tbody");
     const today = new Date();
 
     data.forEach(gig => {
-      if (!gig.Date) return; // skip empty rows
+      if (!gig.Date) return;
 
       const gigDate = parseDateDDMMYYYY(gig.Date);
       if (gigDate >= today) {
-        const tr = document.createElement('tr');
+
+        const ticketsOTD = gig["Tickets OTD"]?.toUpperCase() === "TRUE";
+        const freeEntry = gig["Free Entry"]?.toUpperCase() === "TRUE";
+
+        const tr = document.createElement("tr");
 
         tr.innerHTML = `
           <td>${gig.Date}</td>
           <td>${gig.Group}</td>
           <td>${gig.Venue}</td>
-          <td>${gig['Town/City']}</td>
+          <td>${gig["Town/City"]}</td>
           <td>${gig.Country}</td>
-          <td><a href="${gig['Ticket Link']}" target="_blank">Ticket Link</a></td>
-          <td class="${gig['Tickets OTD'] === "TRUE" ? "checkbox-true" : "checkbox-false"}">${gig['Tickets OTD']}</td>
-          <td class="${gig['Free Entry'] === "TRUE" ? "checkbox-true" : "checkbox-false"}">${gig['Free Entry']}</td>
+          <td><a href="${gig["Ticket Link"]}" target="_blank">Ticket Link</a></td>
+          <td class="${ticketsOTD ? "checkbox-true" : "checkbox-false"}">${ticketsOTD ? "Yes" : "No"}</td>
+          <td class="${freeEntry ? "checkbox-true" : "checkbox-false"}">${freeEntry ? "Yes" : "No"}</td>
         `;
 
         tbody.appendChild(tr);
       }
     });
-  }
-
-  Tabletop.init({
-    key: sheetID,
-    callback: loadGigs,
-    simpleSheet: true
   });
 </script>
+
 </body>
 </html>
