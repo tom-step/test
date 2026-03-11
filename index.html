@@ -63,7 +63,16 @@ function parseCSV(text) {
   });
 }
 
-function parseDateDDMMYYYY(str) {
+function parseDateDDMMYYYY(str){
+
+  // If it's a spreadsheet serial date
+  if(!isNaN(str)){
+    const excelEpoch = new Date(1899,11,30);
+    const date = new Date(excelEpoch.getTime() + str * 86400000);
+    return date;
+  }
+
+  // Normal DD/MM/YYYY
   const [day, month, year] = str.split("/");
   return new Date(`${year}-${month}-${day}`);
 }
