@@ -75,31 +75,55 @@ fetch(sheetURL)
     const tbody = document.querySelector("#gigsTable tbody");
     const today = new Date();
 
-    data.forEach(gig => {
-      if (!gig.Date) return;
+    let currentYear = null;
 
-      const gigDate = parseDateDDMMYYYY(gig.Date);
-      if (gigDate >= today) {
+function formatDate(date){
+  const day = date.getDate();
+  const month = date.toLocaleString('default',{month:'long'});
 
-        const ticketsOTD = gig["Tickets OTD"]?.toUpperCase() === "TRUE";
-        const freeEntry = gig["Free Entry"]?.toUpperCase() === "TRUE";
+  const suffix =
+    day % 10 === 1 && day !== 11 ? "st" :
+    day % 10 === 2 && day !== 12 ? "nd" :
+    day % 10 === 3 && day !== 13 ? "rd" : "th";
 
-        const tr = document.createElement("tr");
+  return `${day}${suffix} ${month}`;
+}
 
-        tr.innerHTML = `
-          <td>${gig.Date}</td>
-          <td>${gig.Group}</td>
-          <td>${gig.Venue}</td>
-          <td>${gig["Town/City"]}</td>
-          <td>${gig.Country}</td>
-          <td><a href="${gig["Ticket Link"]}" target="_blank">Ticket Link</a></td>
-          <td class="${ticketsOTD ? "checkbox-true" : "checkbox-false"}">${ticketsOTD ? "Tickets available on the door" : ""}</td>
-          <td class="${freeEntry ? "checkbox-true" : "checkbox-false"}">${freeEntry ? "Free Entry" : ""}</td>
-        `;
+data.forEach(gig => {
 
-        tbody.appendChild(tr);
-      }
-    });
+  if(!gig.Date) return;
+
+  const gigDate = parseDateDDMMYYYY(gig.Date);
+  if(gigDate < today) return;
+
+  const year = gigDate.getFullYear();
+
+  if(year !== currentYear){
+    const yearRow = document.createElement("tr");
+    yearRow.innerHTML = `<td colspan="7" style="font-size:22px;font-weight:bold;background:#eee">${year}</td>`;
+    tbody.appendChild(yearRow);
+    currentYear = year;
+  }
+
+  const ticketsOTD = gig["Tickets OTD"]?.toUpperCase() === "TRUE";
+  const freeEntry = gig["Free Entry"]?.toUpperCase() === "TRUE";
+
+  const tr = document.createElement("tr");
+
+  tr.innerHTML = `
+    <td>${formatDate(gigDate)}</td>
+    <td>${gig.Group}</td>
+    <td>${gig.Venue}</td>
+    <td>${gig["Town/City"]}</td>
+    <td>${gig.Country}</td>
+    <td><a href="${gig["Ticket Link"]}" target="_blank">Tickets</a></td>
+    <td class="${ticketsOTD ? "checkbox-true":"checkbox-false"}">${ticketsOTD ? "Yes":"No"}</td>
+    <td class="${freeEntry ? "checkbox-true":"checkbox-false"}">${freeEntry ? "Yes":"No"}</td>
+  `;
+
+  tbody.appendChild(tr);
+
+});
   });
 </script>
 
