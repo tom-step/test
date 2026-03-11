@@ -43,8 +43,6 @@
       <th>Town/City</th>
       <th>Country</th>
       <th>Ticket Link</th>
-      <th>Tickets OTD</th>
-      <th>Free Entry</th>
     </tr>
   </thead>
   <tbody></tbody>
@@ -95,8 +93,8 @@ fetch(sheetURL)
           <td>${gig["Town/City"]}</td>
           <td>${gig.Country}</td>
           <td><a href="${gig["Ticket Link"]}" target="_blank">Ticket Link</a></td>
-          <td class="${ticketsOTD ? "checkbox-true" : "checkbox-false"}">${ticketsOTD ? "Yes" : "No"}</td>
-          <td class="${freeEntry ? "checkbox-true" : "checkbox-false"}">${freeEntry ? "Yes" : "No"}</td>
+          <td class="${ticketsOTD ? "checkbox-true" : "checkbox-false"}">${ticketsOTD ? "Tickets available on the door" : ""}</td>
+          <td class="${freeEntry ? "checkbox-true" : "checkbox-false"}">${freeEntry ? "Free Entry" : ""}</td>
         `;
 
         tbody.appendChild(tr);
