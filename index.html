@@ -88,7 +88,7 @@ function formatDate(date){
 
   return `${day}${suffix} ${month}`;
 }
-
+data.sort((a,b)=>parseDateDDMMYYYY(a.Date)-parseDateDDMMYYYY(b.Date));
 data.forEach(gig => {
 
   if(!gig.Date) return;
@@ -100,13 +100,10 @@ data.forEach(gig => {
 
   if(year !== currentYear){
     const yearRow = document.createElement("tr");
-    yearRow.innerHTML = `<td colspan="7" style="font-size:22px;font-weight:bold;background:#eee">${year}</td>`;
+    yearRow.innerHTML = `<td colspan="6" style="font-size:22px;font-weight:bold;background:#eee">${year}</td>`;
     tbody.appendChild(yearRow);
     currentYear = year;
   }
-
-  const ticketsOTD = gig["Tickets OTD"]?.toUpperCase() === "TRUE";
-  const freeEntry = gig["Free Entry"]?.toUpperCase() === "TRUE";
 
   const tr = document.createElement("tr");
 
@@ -117,8 +114,6 @@ data.forEach(gig => {
     <td>${gig["Town/City"]}</td>
     <td>${gig.Country}</td>
     <td><a href="${gig["Ticket Link"]}" target="_blank">Tickets</a></td>
-    <td class="${ticketsOTD ? "checkbox-true":"checkbox-false"}">${ticketsOTD ? "Yes":"No"}</td>
-    <td class="${freeEntry ? "checkbox-true":"checkbox-false"}">${freeEntry ? "Yes":"No"}</td>
   `;
 
   tbody.appendChild(tr);
