@@ -115,12 +115,27 @@ const location = [
   
   const tr = document.createElement("tr");
 
+  let ticketText = "";
+
+if (gig["Ticket Link"] && gig["Ticket Link"].trim() !== "") {
+
+  const url = gig["Ticket Link"];
+
+  let site = "Tickets";
+
+  if(url.includes("eventbrite")) site = "Tickets (Eventbrite)";
+  else if(url.includes("dice")) site = "Tickets (Dice)";
+  else if(url.includes("seetickets")) site = "Tickets (SeeTickets)";
+  else if(url.includes("ticketmaster")) site = "Tickets (Ticketmaster)";
+
+  ticketText = `<a href="${url}" target="_blank">${site}</a>`;
+}
+
   tr.innerHTML = `
   <td>${formatDate(gigDate)}</td>
   <td>${gig.Group}</td>
   <td>${location}</td>
-  <td>${gig["Ticket Link"] ? `<a href="${gig["Ticket Link"]}" target="_blank">link to event</a>` : ""}</td>
-`;
+  <td>${ticketText}</td>`;
 
   tbody.appendChild(tr);
 
