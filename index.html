@@ -102,21 +102,25 @@ data.forEach(gig => {
 
   if(year !== currentYear){
     const yearRow = document.createElement("tr");
-    yearRow.innerHTML = `<td colspan="6" style="font-size:22px;font-weight:bold;background:#eee">${year}</td>`;
+    yearRow.innerHTML = `<td colspan="4" style="font-size:22px;font-weight:bold;background:#eee">${year}</td>`;
     tbody.appendChild(yearRow);
     currentYear = year;
   }
-
+  
+const location = [
+  gig.Venue,
+  gig["Town/City"],
+  gig.Country
+].filter(v => v && v.trim() !== "").join(", ");
+  
   const tr = document.createElement("tr");
 
   tr.innerHTML = `
-    <td>${formatDate(gigDate)}</td>
-    <td>${gig.Group}</td>
-    <td>${gig.Venue}</td>
-    <td>${gig["Town/City"]}</td>
-    <td>${gig.Country}</td>
-    <td><a href="${gig["Ticket Link"]}" target="_blank">Tickets</a></td>
-  `;
+  <td>${formatDate(gigDate)}</td>
+  <td>${gig.Group}</td>
+  <td>${location}</td>
+  <td><a href="${gig["Ticket Link"]}" target="_blank">Tickets</a></td>
+`;
 
   tbody.appendChild(tr);
 
